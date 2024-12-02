@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { db } from "../Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import kapak from "../images/kapak.jpg";
+import istiklalmarsi from "../videos/istiklalmars.mp4";
 import battalgazi from "../videos/battalgazi.mp4";
 import bilgehatun from "../videos/bilgehatun.mp4";
 import dedekorkut from "../videos/dedekorkut.mp4";
@@ -15,6 +17,7 @@ import semah from "../videos/semah.mp3";
 import semahslayt from "../videos/slayt2.mp4";
 import ataturk from "../videos/ataturk.mp4";
 import bayrak from "../videos/bayrak.mp4";
+import battalgazisessiz from "../videos/sessizslayt.mp4";
 
 const Home = () => {
   const [videoStatus, setVideoStatus] = useState("giris");
@@ -58,10 +61,14 @@ const Home = () => {
           src={
             videoStatus === "battalgazi"
               ? battalgazi
+              : videoStatus === "istiklalmarsi"
+              ? istiklalmarsi
               : videoStatus === "bilgehatun"
               ? bilgehatun
               : videoStatus === "dedekorkut"
               ? dedekorkut
+              : videoStatus === "battalgazisessiz"
+              ? battalgazisessiz
               : videoStatus === "battalgazidua"
               ? battalgazidua
               : videoStatus === "ezan"
@@ -88,6 +95,12 @@ const Home = () => {
           Your browser does not support the video tag.
         </video>
 
+        {videoStatus === "kapak" && (
+          <img
+            className="absolute top-0 right-0 inset-0 w-full h-full"
+            src={kapak}
+          />
+        )}
         {videoStatus === "ezan" && (
           <img
             className="absolute top-0 right-0 inset-0 w-full h-full"

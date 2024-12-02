@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 import { ChevronDown, ChevronUp, Play, Home, Video } from "lucide-react";
+import logo from "../images/siluet.png";
 
 const Panel = () => {
   const [aktif, setAktif] = useState("giris");
@@ -11,25 +12,39 @@ const Panel = () => {
   const correctPassword = "bmtal1999";
 
   const scenes = {
-    "1. Sahne": [
+    Açılış: [
       { id: "giris", title: "Kapak", icon: <Home size={20} /> },
+      { id: "kapak", title: "Kapak 2", icon: <Home size={20} /> },
+      {
+        id: "istiklalmarsi",
+        title: "İstiklal Marşı ve Saygı Duruşu",
+        icon: <Video size={20} />,
+      },
+      {
+        id: "okultanitim",
+        title: "Okul Tanıtım Videosu (Eklenmedi)",
+        icon: <Video size={20} />,
+      },
       {
         id: "battalgazi",
         title: "Battalgazi Tanıtım",
         icon: <Video size={20} />,
       },
     ],
-    "2. Sahne": [
+    "1. Sahne": [
       { id: "bilgehatun", title: "Bilge Hatun", icon: <Video size={20} /> },
     ],
-    "3. Sahne": [
+    "2. Sahne": [
       {
         id: "dedekorkut",
         title: "Dede Korkut Slayt",
         icon: <Video size={20} />,
       },
-    ],
-    "4. Sahne": [
+      {
+        id: "battalgazisessiz",
+        title: "Battalgazi Slayt",
+        icon: <Video size={20} />,
+      },
       {
         id: "battalgazidua",
         title: "Battalgazi Dua",
@@ -45,8 +60,6 @@ const Panel = () => {
         title: "Ney",
         icon: <Video size={20} />,
       },
-    ],
-    "5. Sahne": [
       {
         id: "kilicsahne",
         title: "Kılıç Gösterisi",
@@ -58,12 +71,22 @@ const Panel = () => {
         icon: <Video size={20} />,
       },
       {
+        id: "ney",
+        title: "Sufi-Tasavvuf Müziği",
+        icon: <Video size={20} />,
+      },
+      {
         id: "semahsemazen",
         title: "Semah ve Semazen",
         icon: <Video size={20} />,
       },
     ],
-    "6. Sahne": [
+    "3. Sahne": [
+      {
+        id: "dedekorkut2",
+        title: "Dede Korkut Slayt",
+        icon: <Video size={20} />,
+      },
       {
         id: "bayrak",
         title: "Bayrak Gif",
@@ -72,11 +95,6 @@ const Panel = () => {
       {
         id: "ataturk",
         title: "Ne Mutlu Türküm Diyene",
-        icon: <Video size={20} />,
-      },
-      {
-        id: "dedekorkut2",
-        title: "Dede Korkut Slayt",
         icon: <Video size={20} />,
       },
     ],
@@ -134,7 +152,7 @@ const Panel = () => {
       <div className="max-w-4xl mx-auto p-6">
         <div className="bg-white shadow-lg rounded-2xl p-8 mb-8 text-center border border-gray-100">
           <img
-            src="https://bmtal-yemekhane.vercel.app/static/media/siluet.1a6d5f6126268ceefae4.png"
+            src={logo}
             className="w-32 mx-auto mb-4 transition-transform hover:scale-105"
             alt="Logo"
           />

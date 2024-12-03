@@ -14,15 +14,9 @@ const Panel = () => {
   const scenes = {
     Açılış: [
       { id: "giris", title: "Kapak", icon: <Home size={20} /> },
-      { id: "kapak", title: "Kapak 2", icon: <Home size={20} /> },
       {
         id: "istiklalmarsi",
         title: "İstiklal Marşı ve Saygı Duruşu",
-        icon: <Video size={20} />,
-      },
-      {
-        id: "okultanitim",
-        title: "Okul Tanıtım Videosu (Eklenmedi)",
         icon: <Video size={20} />,
       },
       {
@@ -43,11 +37,6 @@ const Panel = () => {
       {
         id: "battalgazisessiz",
         title: "Battalgazi Slayt",
-        icon: <Video size={20} />,
-      },
-      {
-        id: "battalgazidua",
-        title: "Battalgazi Dua",
         icon: <Video size={20} />,
       },
       {

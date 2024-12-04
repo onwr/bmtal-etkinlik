@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 import { ChevronDown, ChevronUp, Play, Home, Video } from "lucide-react";
 import logo from "../images/siluet.png";
@@ -10,6 +10,7 @@ const Panel = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const correctPassword = "bmtal1999";
+  const [volumeLevels, setVolumeLevels] = useState({});
 
   const scenes = {
     Açılış: [
@@ -36,7 +37,7 @@ const Panel = () => {
       },
       {
         id: "battalgazisessiz",
-        title: "Battalgazi Slayt",
+        title: "Battalgazi Slayt (İstanbul Kuşatma)",
         icon: <Video size={20} />,
       },
       {
@@ -86,8 +87,24 @@ const Panel = () => {
         title: "Ne Mutlu Türküm Diyene",
         icon: <Video size={20} />,
       },
+      {
+        id: "nutuk",
+        title: "10.Yıl Nutku",
+        icon: <Video size={20} />,
+      },
     ],
   };
+
+  useEffect(() => {
+    const fetchVolumeLevels = async () => {
+      const docRef = doc(db, "video", "battal2");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setVolumeLevels(docSnap.data());
+      }
+    };
+    fetchVolumeLevels();
+  }, []);
 
   const handleUpdateDurum = async (durum) => {
     const docRef = doc(db, "video", "battal1");
@@ -96,6 +113,16 @@ const Panel = () => {
       setAktif(durum);
     } catch (error) {
       console.error("Durum güncellenirken hata oluştu:", error);
+    }
+  };
+
+  const handleVolumeChange = async (id, value) => {
+    const docRef = doc(db, "video", "battal2");
+    try {
+      await updateDoc(docRef, { [id]: value });
+      setVolumeLevels((prev) => ({ ...prev, [id]: value }));
+    } catch (error) {
+      console.error("Volume update error:", error);
     }
   };
 
@@ -171,22 +198,41 @@ const Panel = () => {
               {openSection === sectionName && (
                 <div className="p-4 space-y-3 bg-blue-500/10 shadow-inner">
                   {sectionScenes.map((scene) => (
-                    <button
-                      key={scene.id}
-                      onClick={() => handleUpdateDurum(scene.id)}
-                      className={`w-full p-4 rounded-lg flex items-center gap-3 transition-all shadow-sm
+                    <>
+                      <button
+                        key={scene.id}
+                        onClick={() => handleUpdateDurum(scene.id)}
+                        className={`w-full p-4 rounded-lg flex items-center gap-3 transition-all shadow-sm
                         ${
                           aktif === scene.id
                             ? "bg-blue-500 text-white hover:bg-blue-600"
                             : "bg-white text-gray-700 hover:bg-gray-100"
                         }`}
-                    >
-                      {scene.icon}
-                      <span className="text-lg">{scene.title}</span>
+                      >
+                        {scene.icon}
+                        <span className="text-lg">{scene.title}</span>
+                        {aktif === scene.id && (
+                          <Play size={20} className="ml-auto" />
+                        )}
+                      </button>
                       {aktif === scene.id && (
-                        <Play size={20} className="ml-auto" />
+                        <div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={volumeLevels[scene.id] || 50}
+                            onChange={(e) =>
+                              handleVolumeChange(scene.id, e.target.value)
+                            }
+                            className="w-full"
+                          />
+                          <p className="text-sm text-gray-500">
+                            Ses Seviyesi: {volumeLevels[scene.id] || 50}
+                          </p>
+                        </div>
                       )}
-                    </button>
+                    </>
                   ))}
                 </div>
               )}

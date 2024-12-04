@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { db } from "../Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import kapak from "../images/kapak.jpg";
+import bayrak2 from "../images/bayrak.jpg";
+import bayrak3 from "../images/bayrak2.jpg";
 import istiklalmarsi from "../videos/istiklalmars.mp3";
 import battalgazi from "../videos/battalgazi.mp4";
 import bilgehatun from "../videos/bilgehatun.mp4";
@@ -16,6 +18,7 @@ import semah from "../videos/semah.mp3";
 import semahslayt from "../videos/slayt2.mp4";
 import ataturk from "../videos/ataturk.mp4";
 import bayrak from "../videos/bayrak.mp4";
+import nutuk from "../videos/10yilmars.mp3";
 import battalgazisessiz from "../videos/sessizslayt.mp4";
 
 const Home = () => {
@@ -84,6 +87,8 @@ const Home = () => {
               ? dedekorkut
               : videoStatus === "bayrak"
               ? bayrak
+              : videoStatus === "nutuk"
+              ? nutuk
               : null
           }
           autoPlay
@@ -91,6 +96,13 @@ const Home = () => {
         >
           Your browser does not support the video tag.
         </video>
+
+        {videoStatus === "istiklalmarsi" && (
+          <img
+            className="absolute top-0 right-0 inset-0 w-full h-full"
+            src={bayrak2}
+          />
+        )}
 
         {videoStatus === "ezan" && (
           <img
@@ -103,6 +115,12 @@ const Home = () => {
         )}
         {videoStatus === "semahsemazen" && (
           <audio ref={audioRef2} src={semah} autoPlay={true} loop />
+        )}
+        {videoStatus === "nutuk" && (
+          <img
+            className="absolute top-0 right-0 inset-0 w-full h-full"
+            src={bayrak3}
+          />
         )}
       </div>
     );

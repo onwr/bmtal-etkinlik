@@ -47,7 +47,7 @@ const Panel = () => {
       },
       {
         id: "ney",
-        title: "Ney",
+        title: "Ney & Sufi Tasavv.",
         icon: <Video size={20} />,
       },
       {
@@ -58,11 +58,6 @@ const Panel = () => {
       {
         id: "mars",
         title: "Kavga Marşı",
-        icon: <Video size={20} />,
-      },
-      {
-        id: "ney",
-        title: "Sufi-Tasavvuf Müziği",
         icon: <Video size={20} />,
       },
       {
@@ -85,11 +80,6 @@ const Panel = () => {
       {
         id: "ataturk",
         title: "Ne Mutlu Türküm Diyene",
-        icon: <Video size={20} />,
-      },
-      {
-        id: "nutuk",
-        title: "10.Yıl Nutku",
         icon: <Video size={20} />,
       },
     ],

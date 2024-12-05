@@ -8,6 +8,7 @@ import istiklalmarsi from "../videos/istiklalmars.mp3";
 import battalgazi from "../videos/battalgazi.mp4";
 import bilgehatun from "../videos/bilgehatun.mp4";
 import dedekorkut from "../videos/dedekorkut.mp4";
+import dedekorkut2 from "../videos/dedekorkut.mp4";
 import ezan from "../videos/ezan.mp4";
 import camii from "../images/cami.jpg";
 import ney from "../videos/ney.mp4";
@@ -18,15 +19,13 @@ import semah from "../videos/semah.mp3";
 import semahslayt from "../videos/slayt2.mp4";
 import ataturk from "../videos/ataturk.mp4";
 import bayrak from "../videos/bayrak.mp4";
-import nutuk from "../videos/10yilmars.mp3";
 import battalgazisessiz from "../videos/sessizslayt.mp4";
+import bayrakgif from "../videos/bayrak.gif";
 
 const Home = () => {
   const [videoStatus, setVideoStatus] = useState("giris");
   const [audioLevels, setAudioLevels] = useState({});
   const videoRef = useRef(null);
-  const audioRef = useRef(null);
-  const audioRef2 = useRef(null);
 
   useEffect(() => {
     const audioDocRef = doc(db, "video", "battal2");
@@ -84,11 +83,9 @@ const Home = () => {
               : videoStatus === "ataturk"
               ? ataturk
               : videoStatus === "dedekorkut2"
-              ? dedekorkut
+              ? dedekorkut2
               : videoStatus === "bayrak"
               ? bayrak
-              : videoStatus === "nutuk"
-              ? nutuk
               : null
           }
           autoPlay
@@ -100,7 +97,7 @@ const Home = () => {
         {videoStatus === "istiklalmarsi" && (
           <img
             className="absolute top-0 right-0 inset-0 w-full h-full"
-            src={bayrak2}
+            src={bayrakgif}
           />
         )}
 
@@ -111,16 +108,10 @@ const Home = () => {
           />
         )}
         {videoStatus === "mars" && (
-          <audio ref={audioRef} src={mars} autoPlay={true} loop />
+          <audio ref={videoRef} src={mars} autoPlay={true} loop />
         )}
         {videoStatus === "semahsemazen" && (
-          <audio ref={audioRef2} src={semah} autoPlay={true} loop />
-        )}
-        {videoStatus === "nutuk" && (
-          <img
-            className="absolute top-0 right-0 inset-0 w-full h-full"
-            src={bayrak3}
-          />
+          <audio ref={videoRef} src={semah} autoPlay={true} loop />
         )}
       </div>
     );
